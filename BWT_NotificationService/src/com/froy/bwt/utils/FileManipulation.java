@@ -15,14 +15,16 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.sql.*;
-import java.util.Calendar;
+
+import org.apache.log4j.Logger;
+
+
 
 /*#CREATE DATABASE `BWT` !40100 DEFAULT CHARACTER SET latin1 ;
 #Create table BWT.Raw_XML (xmlData varchar(65000xmlData));*/
 
 public class FileManipulation {
-
+	static final Logger log = Logger.getLogger(FileManipulation.class);
 	
 	//this will return all txt files found under a dirName
 	 public File[] finder( String dirName){
@@ -54,7 +56,7 @@ public class FileManipulation {
 			
 			while ((sCurrentLine = br.readLine()) != null) {
 				Data+=sCurrentLine;
-				//System.out.println(sCurrentLine);
+				//log.info(sCurrentLine);
 			}
 
 		} catch (IOException e) {
@@ -91,7 +93,7 @@ public void move_file(String file_name){
 ///2017-12-24_22:21:38.txt
 	try{
 
-		System.out.println("Moving File");
+		log.info("Moving File");
 		String workingDir=System.getProperty("user.dir");
 		
 		File afile =new File(workingDir+"//"+file_name);
@@ -118,7 +120,7 @@ public void move_file(String file_name){
 	    //delete the original file
 	    afile.delete();
 
-	    System.out.println("File copied successfully!");
+	    log.info("File copied successfully!");
 
 	}catch(IOException e){
 	    e.printStackTrace();
